@@ -1,0 +1,31 @@
+name: sonic-clos
+
+topology:
+  nodes:
+    sonic-spine0:
+      kind: sonic-vs
+      image: netreplica/docker-sonic-vs:latest
+
+    sonic-spine1:
+      kind: sonic-vs
+      image: netreplica/docker-sonic-vs:latest
+
+    sonic-leaf0:
+      kind: sonic-vs
+      image: netreplica/docker-sonic-vs:latest
+
+    sonic-leaf1:
+      kind: sonic-vs
+      image: netreplica/docker-sonic-vs:latest
+
+    sonic-leaf2:
+      kind: sonic-vs
+      image: netreplica/docker-sonic-vs:latest
+
+  links:
+    - endpoints: ["sonic-spine0:eth1", "sonic-leaf0:eth1"]
+    - endpoints: ["sonic-spine0:eth2", "sonic-leaf1:eth1"]
+    - endpoints: ["sonic-spine0:eth3", "sonic-leaf2:eth1"]
+    - endpoints: ["sonic-spine1:eth1", "sonic-leaf0:eth2"]
+    - endpoints: ["sonic-spine1:eth2", "sonic-leaf1:eth2"]
+    - endpoints: ["sonic-spine1:eth3", "sonic-leaf2:eth2"]
